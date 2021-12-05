@@ -1,21 +1,13 @@
-import express, { Application } from 'express'
 import dotenv from 'dotenv'
+import http from 'http'
 import path from 'path'
+
+import app from './app'
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env') })
 
 const port = process.env.SERVER_PORT
 
-const app: Application = express()
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-app.get('/', (request, response) => {
-  response.send({
-    message: 'Hello world'
-  })
-})
-
-app.listen(port, () => {
-  console.log('Express started on port ' + port)
+http.createServer(app).listen(port, () => {
+  console.log(`Server started on port ${port}!`)
 })
