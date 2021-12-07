@@ -1,0 +1,16 @@
+// Just download the "Keycloak OIDC JSON" installation file from
+// your Keycloak server and save it at this project root folder.
+
+{
+  "realm": "my-awesome-realm",
+  "bearer-only": true,
+  "auth-server-url": "http://localhost/auth/",
+  "ssl-required": "external",
+  "resource": "my-rest-api-client-id",
+  "verify-token-audience": true,
+  "credentials": {
+    "secret": "my-client-id-super-secret"
+  },
+  "use-resource-role-mappings": true,
+  "confidential-port": 0
+}
