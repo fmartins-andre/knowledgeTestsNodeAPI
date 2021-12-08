@@ -1,0 +1,24 @@
+@baseApiUrl = {{$dotenv BASE_API_URL}}
+@keycloakIssuer = {{$dotenv KEYCLOAK_ISSUER}}
+@keycloakClientApp = {{$dotenv KEYCLOAK_APP_CLIENT_ID}}
+@keycloakUser = {{$dotenv KEYCLOAK_USER}}
+@keycloakUserPassword = {{$dotenv KEYCLOAK_USER_PASSWORD}}
+@jwtToken =  {{keycloakLogin.response.body.$.access_token}}
+
+###
+
+# @name keycloakLogin
+POST {{keycloakIssuer}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&client_id={{keycloakClientApp}}
+&username={{keycloakUser}}
+&password={{keycloakUserPassword}}
+
+
+###
+
+# @name defaultRoute
+GET {{baseApiUrl}}
+Authorization: Bearer {{jwtToken}}
